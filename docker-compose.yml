@@ -35,4 +35,4 @@ services:        # 실행할 프로그램들
     depends_on:
       - backend
     environment:
-      BACKEND_URL: http://3.34.97.43:8000
+      REACT_APP_BACKEND_URL: http://3.34.97.43:8000
