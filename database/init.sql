@@ -5,6 +5,4 @@ CREATE TABLE users (            /*testdb 안에 user테이블 생성*/
 );
 
 INSERT INTO users (name, email) VALUES 
-    ('111', '111@test.com'),
-    ('222', '222@test.com'),
-    ('333', '333@test.com');
+    ('admin', 'admin@test.com');

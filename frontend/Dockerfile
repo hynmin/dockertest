@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 3000
 
-ENTRYPOINT [ "node", "src/index.js" ] 
+CMD ["npm", "start"]
