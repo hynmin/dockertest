@@ -7,8 +7,9 @@ function App() {
   const [users, setUsers] = useState([]);         // 사용자 목록
   const [message, setMessage] = useState('');     // Hello 메시지
 
-  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000';
-
+  const BACKEND_URL = window.location.hostname === 'localhost'
+  ? 'http://localhost:8000'
+  : 'http://3.34.97.43:8000';
   // Hello 버튼
   const handleHello = async () => {
     const response = await fetch(`${BACKEND_URL}/`);
