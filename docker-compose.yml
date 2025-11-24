@@ -29,7 +29,10 @@ services:        # 실행할 프로그램들
   
   # Node.js 프론트엔드
   frontend:
-    build: ./frontend
+    build: 
+      context: ./frontend
+      args:
+        REACT_APP_BACKEND_URL: http://3.34.97.43:8000
     ports:
       - "3000:3000"           # Node.js 기본 포트
     depends_on:
