@@ -2,10 +2,12 @@ FROM node:16-alpine
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./  
+COPY package*.json ./
 
-RUN npm ci 
+RUN npm install
 
-COPY index.js .
+COPY . .
 
-ENTRYPOINT [ "node", "index.js" ] 
+EXPOSE 3000
+
+ENTRYPOINT [ "node", "src/index.js" ] 

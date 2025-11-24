@@ -1,0 +1,36 @@
+version: '3.8'  # docker-compose 버전
+
+services:        # 실행할 프로그램들
+  db:                               # 서비스 이름
+    image: postgres:15              # 사용할 이미지 
+    container_name: database        # 컨테이너 이름
+    
+    environment:
+      POSTGRES_USER: admin              # PostgreSQL 사용자명 = admin
+      POSTGRES_PASSWORD: password123    # 비밀번호 = password123
+      POSTGRES_DB: testdb               # 데이터베이스 이름 = testdb
+    
+    ports:
+      - "5432:5432"                # 포트 매핑 (외부:내부)
+    
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  
+  backend:
+    build: ./backend          # Dockerfile이 있는 폴더
+    ports:
+      - "8000:8000"           # FastAPI 기본 포트
+    depends_on:
+      - db                    # db가 먼저 실행되길 기다림
+    environment:
+      DATABASE_URL: postgresql://admin:password123@db:5432/testdb
+      #                                            ↑ 서비스 이름!
+  
+  # Node.js 프론트엔드
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"           # Node.js 기본 포트
+    depends_on:
+      - backend
